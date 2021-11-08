@@ -30,6 +30,7 @@ dependencies {
     implementation("org.flywaydb:flyway-core")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("mysql:mysql-connector-java:8.0.11")
+    implementation("org.apache.poi:poi-ooxml:4.1.2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     implementation("io.vavr:vavr-jackson:0.10.3")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
