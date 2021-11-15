@@ -26,7 +26,7 @@ class SalaryProcessingService(
 		val salaryAmount =
 			salaryRatio.multiply(BigDecimal(dto.quantity)).multiply(material.unitPrice.toString().toBigDecimal())
 		var timeSeconds = BigDecimal(fmt.parse(dto.end).time).subtract(BigDecimal(fmt.parse(dto.start).time)).divide(BigDecimal("3600000"))
-		if (dto.launchDeduct == null) {
+		if (dto.launchDeduct == true) {
 			timeSeconds = timeSeconds.subtract(BigDecimal("0.5"))
 		}
 		val salary = Salary(
