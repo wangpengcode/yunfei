@@ -1,5 +1,6 @@
 package com.yunfei.finance.controller
 
+import com.yunfei.finance.dto.Response
 import com.yunfei.finance.dto.SalaryUploadDto
 import com.yunfei.finance.persistence.entity.Salary
 import com.yunfei.finance.service.persistence.SalaryPersistenceService
@@ -31,13 +32,21 @@ class SalaryController(
 	}
 	
 	@PostMapping("/upload")
-	fun uploadSalaryByStaffId(@RequestBody salaryUploadDto: SalaryUploadDto): Salary {
-		try {
+	fun uploadSalaryByStaffId(@RequestBody salaryUploadDto: SalaryUploadDto): Response<Salary> {
+		return try {
 			logger.info("#SalaryController#uploadSalaryByStaffId request {}", salaryUploadDto)
-			return salaryProcessingService.salaryProcessing(salaryUploadDto)
+			val salary = salaryProcessingService.salaryProcessing(salaryUploadDto)
+			Response(
+				isSucceed = true,
+				data = salary
+			)
 		} catch (e: Exception) {
 			logger.error("#SalaryController#uploadSalaryByStaffId error:", e)
-			throw e
+			Response(
+				isSucceed = false,
+				data = null,
+				message = e.message
+			)
 		}
 	}
 }
