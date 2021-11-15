@@ -3,6 +3,7 @@ package com.yunfei.finance.persistence.entity
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.math.BigDecimal
 import java.math.BigInteger
+import java.sql.Date
 import java.sql.Timestamp
 import javax.persistence.*
 
@@ -11,7 +12,7 @@ import javax.persistence.*
 @EntityListeners(AuditingEntityListener::class)
 data class Salary(
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "ID", length = 64)
 	val id: BigInteger? = null,
 	
@@ -25,10 +26,10 @@ data class Salary(
 	var salaryDate: String,
 	
 	@Column(name = "START")
-	var start: Timestamp,
+	var start: String,
 	
 	@Column(name = "END")
-	var end: Timestamp,
+	var end: String,
 	
 	@Column(name = "LAUNCH_DEDUCT")
 	var launchDeduct: Boolean,

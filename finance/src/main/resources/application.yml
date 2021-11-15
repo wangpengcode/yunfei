@@ -13,3 +13,7 @@ spring:
     url: jdbc:mysql://localhost:3306/yunfei?useSSL=false&serverTimezone=UTC
     username: root
     password: yunfei123
+
+yunfei:
+  workload:
+    salaryRatio: 1.5

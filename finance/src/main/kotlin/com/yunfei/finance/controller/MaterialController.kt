@@ -3,7 +3,7 @@ package com.yunfei.finance.controller
 import com.yunfei.finance.annotation.Column
 import com.yunfei.finance.extensions.excelToList
 import com.yunfei.finance.persistence.entity.Material
-import com.yunfei.finance.service.MaterialPersistenceService
+import com.yunfei.finance.service.persistence.MaterialPersistenceService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus

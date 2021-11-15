@@ -1,17 +1,19 @@
 package com.yunfei.finance.controller
 
+import com.yunfei.finance.dto.SalaryUploadDto
 import com.yunfei.finance.persistence.entity.Salary
-import com.yunfei.finance.service.SalaryPersistenceService
+import com.yunfei.finance.service.persistence.SalaryPersistenceService
+import com.yunfei.finance.service.salary.SalaryProcessingService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/salary")
-class SalaryController(val salaryPersistenceService: SalaryPersistenceService) {
+class SalaryController(
+	val salaryPersistenceService: SalaryPersistenceService,
+	val salaryProcessingService: SalaryProcessingService
+) {
 	val logger: Logger = LoggerFactory.getLogger(SalaryController::class.java)
 	
 	@GetMapping("/query/{staffId}/{day}")
@@ -23,7 +25,19 @@ class SalaryController(val salaryPersistenceService: SalaryPersistenceService) {
 			logger.info("#SalaryController#querySalaryByStaffIdAndDay staffId = {}, day = {}", staffId, day)
 			return salaryPersistenceService.queryByStaffIdAndDay(staffId, day)
 		} catch (e: Exception) {
-			throw e;
+			logger.error("#SalaryController#querySalaryByStaffIdAndDay error:", e)
+			throw e
+		}
+	}
+	
+	@PostMapping("/upload")
+	fun uploadSalaryByStaffId(@RequestBody salaryUploadDto: SalaryUploadDto): Salary {
+		try {
+			logger.info("#SalaryController#uploadSalaryByStaffId request {}", salaryUploadDto)
+			return salaryProcessingService.salaryProcessing(salaryUploadDto)
+		} catch (e: Exception) {
+			logger.error("#SalaryController#uploadSalaryByStaffId error:", e)
+			throw e
 		}
 	}
 }

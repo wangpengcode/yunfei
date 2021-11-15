@@ -1,4 +1,4 @@
-package com.yunfei.finance.service
+package com.yunfei.finance.service.persistence
 
 import com.yunfei.finance.persistence.entity.Staff
 import com.yunfei.finance.persistence.repository.StaffRepository

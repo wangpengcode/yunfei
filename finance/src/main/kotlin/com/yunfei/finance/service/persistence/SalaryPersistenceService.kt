@@ -1,4 +1,4 @@
-package com.yunfei.finance.service
+package com.yunfei.finance.service.persistence
 
 import com.yunfei.finance.persistence.entity.Salary
 import com.yunfei.finance.persistence.repository.SalaryRepository
@@ -18,6 +18,15 @@ class SalaryPersistenceService(
 		} catch (e: Exception) {
 			logger.error("#SalaryPersistenceService#queryByStaffIdAndDay", e)
 			throw e;
+		}
+	}
+	
+	fun save(salary: Salary): Salary {
+		return try {
+			salaryRepository.save(salary)
+		} catch (e: Exception) {
+			logger.error("#SalaryPersistenceService#save", e)
+			throw e
 		}
 	}
 	

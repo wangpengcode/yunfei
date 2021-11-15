@@ -1,4 +1,4 @@
-package com.yunfei.finance.service
+package com.yunfei.finance.service.persistence
 
 import com.yunfei.finance.persistence.entity.Material
 import com.yunfei.finance.persistence.repository.MaterialRepository
@@ -23,5 +23,19 @@ class MaterialPersistenceService(
 			}
 		}
 		return list
+	}
+	
+	fun findById(materialId: String): Material? {
+		return try {
+			val optional = materialRepository.findById(materialId)
+			if (optional.isPresent) {
+				optional.get()
+			} else {
+				null
+			}
+		} catch (e: Exception) {
+			logger.error("#MaterialPersistenceService#findById error:", e)
+			null
+		}
 	}
 }
