@@ -34,7 +34,7 @@ class MaterialController(
 		logger.info(" excel " + list.size)
 		list.forEach { print(it.materialId) }
 		val materials = list.stream().map {
-			Material(it.materialId, it.drawingId, it.processingId, it.processingName, it.unitPrice, it.quota)
+			Material(it.materialId, it.drawingId, it.processingId, it.processingName, it.unitPrice.toBigDecimal(), it.quota.toBigDecimal())
 		}.toList()
 		notUpload = materialPersistenceService.save(materials)
 		return ResponseEntity.status(HttpStatus.OK).body(notUpload)
@@ -54,9 +54,9 @@ class MaterialController(
 		var processingName: String = ""
 		
 		@Column(4)
-		var unitPrice: BigDecimal = BigDecimal.ZERO
+		var unitPrice: String = ""
 		
 		@Column(5)
-		var quota: BigDecimal = BigDecimal.ZERO
+		var quota: String = ""
 	}
 }
